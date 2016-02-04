@@ -1,0 +1,35 @@
+\input{preamble}
+\newcommand{\flops}[1]{flops}
+\raggedbottom
+\begin{document}
+
+\frontmatter	% Romertal på de første sider
+\input{Chapters/Formalia/Frontpage.tex}
+\cleardoublepage		
+\input{Chapters/Formalia/titelblad.tex}
+\cleardoublepage
+\input{Chapters/Abstract.tex}
+\cleardoublepage	
+%\input{Chapters/Formalia/Preface.tex}
+%\cleardoublepage			
+\tableofcontents*
+
+\mainmatter % Side nummereringen starter ved 1 herfra
+
+	\input{Chapters/Introduction.tex}
+	\input{Chapters/Method.tex}
+	
+%	\input{Chapters/Results.tex}
+
+%	\input{Chapters/Conclusion.tex}
+
+
+	% ¤¤ LITTERATURLISTE: SKAL VÆRE SIDST ¤¤
+		\bibliographystyle{ieeetr}
+		\bibliography{Bibtex/litteratur}
+
+% ¤¤ BILAG: SKAL VÆRE ALLERSIDST ¤¤
+	\appendix
+
+	
+\end{document}

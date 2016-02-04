@@ -1,0 +1,44 @@
+\thispagestyle{empty}
+
+\begin{center}
+
+
+% Upper part of the page
+
+\textsc{\LARGE University of Oslo}\\[0.5cm]
+
+\textsc{\Large Computational Physics}\\[2cm]
+ 
+
+% Title
+\HRule \\[0.4cm]
+ \LARGE \textbf{Project 4}  \\[0.2cm]
+\HRule \\[2.5cm]
+
+\vspace{2cm}
+\includegraphics[width=0.8\textwidth]{Figures/UiO_Seal_A_ENG.png}\\  %Forsidebillede
+
+\vfill 
+ 
+% Forfattere og vejleder
+\begin{tabularx}{\textwidth}{l X r}
+\hline
+& & \large \emph{Authors:}\\
+& & \large Birgitte Madsen\\
+& & \large Magnus Isaksen \\
+& & \large Soumya Chalakkal \\
+\hline
+
+\end{tabularx}
+
+
+
+
+\vfill
+
+% Bottom of the page
+{\large Autumn 2015}
+
+\end{center}
+\cleardoublepage
+

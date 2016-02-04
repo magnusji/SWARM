@@ -1,0 +1,351 @@
+\documentclass[a4paper,11pt,fleqn,twoside,openright]{memoir} % Brug openright hvis chapters skal starte på højresider; openany, oneside
+%\usepackage{fancyhdr}%mega nemt sidehoved/fod%virker ikke med memoir åbenbart
+%%%% PACKAGES %%%%
+
+%\usepackage[T1]{fontenc}
+%\usepackage{pgfplots}%Ting til grafer (sat ind december 2012)
+%\pgfplotsset{
+%  compat=newest,
+%  xlabel near ticks,
+%  ylabel near ticks
+%} Ting til grafer (sat ind december 2012)
+
+\usepackage[english]{babel}							% Dansk sporg, f.eks. tabel, figur og kapitel
+%\usepackage{pst-plot,pst-node}
+%\usepackage[pdf]{pstricks} % Gør det muligt at tegne vektor grafik.
+%\usepackage{auto-pst-pdf,pstricks-add}
+% ¤¤ Oversættelse og tegnsætning ¤¤ %
+%\usepackage[ansinew]{inputenc}					% Gør det muligt at bruge æ, ø og å i sine .tex-filer
+
+%\usepackage[T1]{fontenc}								% Hjælper med orddeling ved æ, ø og å. Sætter fontene til at være ps-fonte, i stedet for bmp					
+
+% ¤¤ FONTS ¤¤ % LaTeX er fanme ringe til skrifttyper!
+%\usepackage{txfonts}									% konflikter med et eller andet.. giver i hvert fald fejl
+\usepackage{mathptmx}								% times (den vi normalt bruger - bare ingen fed mat skrift)
+%\usepackage{fourier}									% sådan lidt middle ground mellem times og pazo (har heller ikke mathbf)
+%\usepackage{mathpazo}								% Har fed tekst i matematik (minus mathbf), grim almindelig skrift
+%\usepackage{mtpro2}									% følger ikke med som standard, men hvis nogen kan installere det skal de da være velkomne
+
+\usepackage{latexsym}										% LaTeX symboler
+\usepackage{xcolor,ragged2e,fix-cm}			% Justering af elementer
+\usepackage{pdfpages}										% Gør det muligt at inkludere pdf-dokumenter med kommandoen \includepdf[pages={x-y}]{fil.pdf}	
+\pretolerance=2500 											% Gør det muligt at justre afstanden med ord (højt tal, mindre orddeling og mere space mellem ord)
+\usepackage{ulem}                       % Gennemstregning af ord med koden \sout{}
+\usepackage{fixltx2e}										% Retter forskellige bugs i LaTeX-kernen
+\usepackage[shortlabels]{enumitem}			% Muliggør enkelt konfiguration af lister
+\usepackage{alltt}											% Bruges af highlighting (matlab kode)
+%\usepackage{Lastpage}
+
+%Matlab kode hightlighting
+ \definecolor{string}{rgb}{0.7,0.0,0.0}
+    \definecolor{comment}{rgb}{0.13,0.54,0.13}
+    \definecolor{keyword}{rgb}{0.0,0.0,1.0}
+											
+%Include cpp coding in text
+\usepackage{listings}
+\usepackage{color}
+
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+
+\lstset{frame=tb,
+  language=C++,  
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=false,
+  columns=flexible,
+  basicstyle={\small\ttfamily},
+  numbers=none,
+  numberstyle=\tiny\color{gray},
+  keywordstyle=\color{blue},
+  commentstyle=\color{dkgreen},
+  stringstyle=\color{mauve},
+  breaklines=true,
+  breakatwhitespace=true,
+  tabsize=3
+}											
+																			
+% ¤¤ Figurer og tabeller – floats  ¤¤ %
+\usepackage{flafter}										% Sørger for at dine floats ikke optræder i teksten før de er sat ind.
+\usepackage{multirow}                		% Fletning af rækker
+\usepackage{hhline}                   	% Dobbelte horisontale linier
+\usepackage{multicol}         	        % Fletning af kolonner
+\usepackage{colortbl} 									% Muligøre farver i tabeller
+\usepackage{rotating}										% Muliggør rotation af tekst i tabeller med \begin{sideways}...\end{sideways}
+\usepackage{wrapfig}										% Indsættelse af figurer omsvøbt af tekst. \begin{wrapfigure}{Placering}{Størrelse}
+\usepackage{graphicx} 									% Pakke til jpeg/png billeder
+%\pdfoptionpdfminorversion=6%							% Muliggør inkludering af pdf dokumenter, af version 1.6 og højere
+\usepackage{tabularx} %Muliggør at man kan strække en tabel-kolonne til ønsket længde
+\newsubfloat{figure}
+\usepackage{epstopdf}
+
+% ¤¤ Matematiske formler og maskinkode ¤¤
+\usepackage{amsmath, amssymb} 	% Bedre matematik og ekstra fonte 
+\usepackage{textcomp}                 	% Adgang til tekstsymboler
+\usepackage{mathtools}									% Udvidelse af amsmath-pakken. 
+\usepackage{eso-pic}										% Tilføj billedekommandoer på hver side
+\usepackage{lipsum}											% Dummy text \lipsum[..]
+
+
+
+% ¤¤ Referencer, bibtex og url'er ¤¤ %
+\usepackage{url}												% Til at sætte urler op med. Virker sammen med hyperref
+\usepackage[english]{varioref}						% Giver flere bedre mulighed for at lave krydshenvisninger
+%\usepackage{natbib}											% Litteraturliste med forfatter-år og nummerede referencer
+%\usepackage{cite} 												% Gør det muligt at nummere kilder
+\usepackage{xr}													% Referencer til eksternt dokument med \externaldocument{<NAVN>}
+\usepackage{nomencl}										% Pakke til at danne nomenklaturliste
+\makenomenclature												% Nomenklaturliste
+
+
+% ¤¤ Floats ¤¤ %
+\let\newfloat\relax 										% Memoir har allerede defineret denne, men det gør float pakken også
+\usepackage{float}
+
+\usepackage[footnote,draft,english,silent,nomargin]{fixme}		% Indsæt rettelser og lignende med \fixme{...} Med final i stedet for draft, udløses en error 																															for hver fixme, der ikke er slettet, når rapporten bygges.
+
+%%%% CUSTOM SETTINGS %%%%
+
+% ¤¤ Marginer ¤¤ %
+\setlrmarginsandblock{3.5cm}{2.5cm}{*}	% \setlrmarginsandblock{Indbinding}{Kant}{Ratio}
+\setulmarginsandblock{2.5cm}{3.0cm}{*}	% \setulmarginsandblock{Top}{Bund}{Ratio}
+\checkandfixthelayout 									% Laver forskellige beregninger og sætter de almindelige længder op til brug ikke memoir pakker
+
+%	¤¤ Afsnitsformatering ¤¤ %
+\setlength{\parindent}{0mm}           	% Størrelse af indryk
+\setlength{\parskip}{4mm}          			% Afstand mellem afsnit ved brug af double Enter
+\linespread{1,1}												% Linie afstand
+
+% ¤¤ Litteraturlisten ¤¤ %
+%\bibpunct[,]{[}{]}{;}{a}{,}{,} 					% Definerer de 6 parametre ved Harvard henvisning (bl.a. parantestype og seperatortegn)
+%\bibliographystyle{bibtex/harvard}			% Udseende af litteraturlisten. Ligner dk-apali - mvh Klein
+
+% ¤¤ Indholdsfortegnelse ¤¤ %
+\setsecnumdepth{subsection}		 					% Dybden af nummerede overkrifter (part/chapter/section/subsection)
+\maxsecnumdepth{subsection}							% Ændring af dokumentklassens grænse for nummereringsdybde
+\settocdepth{subsection} 								% Dybden af indholdsfortegnelsen
+
+% ¤¤ Lister ¤¤ %
+\setlist{
+  topsep=-1ex,														% Vertikal afstand mellem tekst og listen
+  itemsep=-1ex,													% Vertikal afstand mellem items
+  partopsep=-0ex,
+  parsep=1ex
+} 
+
+% ¤¤ Visuelle referencer ¤¤ %
+\usepackage[colorlinks]{hyperref}			 	% Giver mulighed for at ens referencer bliver til klikbare hyperlinks. .. [colorlinks]{..}
+\hypersetup{pdfborder = 0}							% Fjerner ramme omkring links i fx indholsfotegnelsen og ved kildehenvisninger ¤¤
+\hypersetup{														%	Opsætning af farvede hyperlinks
+    colorlinks = false,
+    linkcolor = black,
+    anchorcolor = black,
+    citecolor = black
+}
+
+\definecolor{gray}{gray}{0.80}					% Definerer farven grå
+
+% ¤¤ Opsætning af figur- og tabeltekst ¤¤ %
+ 	\captionnamefont{
+ 		\small\bfseries\itshape}						% Opsætning af tekstdelen ("Figur" eller "Tabel")
+  \captiontitlefont{\small}							% Opsætning af nummerering
+  \captiondelim{. }											% Seperator mellem nummerering og figurtekst
+  \hangcaption													%	Venstrejusterer flere-liniers figurtekst under hinanden
+  \captionwidth{\linewidth}							% Bredden af figurteksten
+	\setlength{\belowcaptionskip}{-15pt}		% Afstand under figurteksten
+		
+% ¤¤ Navngivning ¤¤ %
+\addto\captionsenglish{
+	\renewcommand\appendixname{Appendix}
+	\renewcommand\contentsname{Table of Contents}	
+	\renewcommand\appendixpagename{Appendix}
+	\renewcommand\cftchaptername{\chaptername~}				% Skriver "Kapitel" foran kapitlerne i indholdsfortegnelsen
+	\renewcommand\cftappendixname{\appendixname~}			% Skriver "Bilag" foran bilagene i indholdsfortegnelsen
+	\renewcommand\appendixtocname{Appendix}
+}
+
+% ¤¤ Kapiteludssende ¤¤ %
+
+
+\definecolor{numbercolor}{gray}{0.7}			% Definerer en farve til brug til kapiteludseende
+\newif\ifchapternonum
+
+\makechapterstyle{jenor}{									% Definerer kapiteludseende -->
+  \renewcommand\printchaptername{}
+  \renewcommand\printchapternum{}
+  \renewcommand\printchapternonum{\chapternonumtrue}
+  \renewcommand\chaptitlefont{\fontfamily{pbk}\fontseries{db}\fontshape{n}\fontsize{25}{35}\selectfont\raggedleft}
+  \renewcommand\chapnumfont{\fontfamily{pbk}\fontseries{m}\fontshape{n}\fontsize{1in}{0in}\selectfont\color{numbercolor}}
+  \renewcommand\printchaptertitle[1]{%
+    \noindent
+    \ifchapternonum
+    \begin{tabularx}{\textwidth}{X}
+    {\let\\\newline\chaptitlefont ##1\par} 
+    \end{tabularx}
+    \par\vskip-2.5mm\hrule
+    \else
+    \begin{tabularx}{\textwidth}{Xl}
+    {\parbox[b]{\linewidth}{\chaptitlefont ##1}} & \raisebox{-15pt}{\chapnumfont \thechapter}
+    \end{tabularx}
+    \par\vskip2mm\hrule
+    \fi
+  }
+}																						% <--
+
+%BLUEBOX KAPITEL
+\newsavebox{\ChpNumBox}
+\definecolor{ChapBlue}{rgb}{1,0,0} % !!
+\makeatletter
+\newcommand*{\thickhrulefill}{%
+\leavevmode\leaders\hrule height 1\p@ \hfill \kern \z@}
+\newcommand*\BuildChpNum[2]{%
+\begin{tabular}[t]{@{}c@{}}
+\makebox[0pt][c]{#1\strut} \\[.5ex]
+\colorbox{ChapBlue}{%
+\rule[-10em]{0pt}{0pt}%
+\rule{1ex}{0pt}\color{black}#2\strut
+\rule{1ex}{0pt}}%
+\end{tabular}}
+\makechapterstyle{BlueBox}{%
+\renewcommand{\chapnamefont}{\large\scshape}
+\renewcommand{\chapnumfont}{\Huge\bfseries} 		
+\renewcommand{\chaptitlefont}{\raggedright\Huge\scshape} % \bfseries
+\setlength{\beforechapskip}{10pt}	%DEFAULT:20pt
+\setlength{\midchapskip}{20pt}	%DEFAULT:26pt
+\setlength{\afterchapskip}{15pt}	%DEFAULT:40pt !!
+\renewcommand{\printchaptername}{}
+\renewcommand{\chapternamenum}{}
+\renewcommand{\printchapternum}{%
+\sbox{\ChpNumBox}{%
+\BuildChpNum{\chapnamefont\@chapapp}%
+{\chapnumfont\thechapter}}}
+\renewcommand{\printchapternonum}{%
+\sbox{\ChpNumBox}{%
+\BuildChpNum{\chapnamefont\vphantom{\@chapapp}}%
+{\chapnumfont\hphantom{\thechapter}}}}
+\renewcommand{\afterchapternum}{}
+\renewcommand{\printchaptertitle}[1]{%
+\usebox{\ChpNumBox}\hfill
+\parbox[t]{\hsize-\wd\ChpNumBox-1em}{%
+\vspace{\midchapskip}%
+\thickhrulefill\par
+\chaptitlefont ##1\par}}%
+}
+
+
+% Valg af kapiteludseende - dette kan udskiftes efter ønske
+%\chapterstyle{madsen}	%P1-style		
+\chapterstyle{BlueBox}									
+
+% ¤¤ Sidehoved ¤¤ %
+
+\makepagestyle{custom}		% Definerer sidehoved og sidefod - kan modificeres efter ønske -->
+\makepsmarks{custom}{																						
+\def\chaptermark##1{\markboth{\itshape\thechapter. ##1}{}}		% Henter kapitlet den pågældende side hører under med kommandoen \leftmark. \itshape gør teksten kursiv
+\def\sectionmark##1{\markright{\thesection. ##1}{}}					% Henter afsnittet den pågældende side hører under med kommandoen \rightmark
+}																														% Sidetallet skrives med kommandoen \thepage	
+\makeevenhead{custom}{Computational Physics}{}{\leftmark}							% Definerer lige siders sidehoved efter modellen \makeevenhead{Navn}{Venstre}{Center}{Højre}
+\makeoddhead{custom}{\rightmark}{}{University of Oslo}			% Definerer ulige siders sidehoved efter modellen \makeoddhead{Navn}{Venstre}{Center}{Højre}
+\makeevenfoot{custom}{\thepage}{}{}													% Definerer lige siders sidefod efter modellen \makeevenfoot{Navn}{Venstre}{Center}{Højre}
+\makeoddfoot{custom}{}{}{\thepage}														% Definerer ulige siders sidefod efter modellen \makeoddfoot{Navn}{Venstre}{Center}{Højre}		
+\makeheadrule{custom}{\textwidth}{0.5pt}											% Tilføjer en streg under sidehovedets indhold
+\makefootrule{custom}{\textwidth}{0.5pt}{1mm}								% Tilføjer en streg under sidefodens indhold
+
+\copypagestyle{nychapter}{custom}														% Følgende linier sørger for, at sidefoden bibeholdes på kapitlets første side
+\makeoddhead{nychapter}{}{}{}
+\makeevenhead{nychapter}{}{}{}
+\makeheadrule{nychapter}{\textwidth}{0pt}
+\aliaspagestyle{chapter}{nychapter}													% <--
+
+\pagestyle{custom} %normalt plain% Valg af sidehoved og sidefod
+\usepackage[left=2.4cm, right=2.4cm, top=3cm, bottom=3cm]{geometry}	%Overrider tidliger marginer - men det er lidt mere simpelt.
+
+%%%% CUSTOM COMMANDS %%%%
+%referencer
+\newcommand{\figref}[1]{Fig.~\ref{#1}}
+\newcommand{\tabref}[1]{Tab.~\ref{#1}}	
+\newcommand{\matref}[1]{Eq.~\eqref{#1}}
+\newcommand{\chapref}[1]{Chap.~\ref{#1}}
+\newcommand{\secref}[1]{Sec.~\ref{#1}}
+\newcommand{\subsecref}[1]{Subsec.~\ref{#1}}
+\newcommand{\appref}[1]{App.~\ref{#1}}
+\newcommand{\citer}[1]{\citep[Se][]{#1}}
+\newcommand{\citerk}[2][]{\citep[Se][kap.~#1]{#2}}
+\newcommand{\citers}[2][]{\citep[Se][s.~#1]{#2}}
+
+
+% ¤¤ Billede hack ¤¤ %
+\newcommand{\figur}[4]{
+		\begin{figure}[H] \centering
+			\includegraphics[width=#1\textwidth]{billeder/#2}
+			\caption{#3}\label{#4}
+		\end{figure} 
+		}
+		
+% ¤¤ Specielle tegn ¤¤ %
+\newcommand{\grader}{\ensuremath{^{\circ}\text{C}}}
+\newcommand{\gr}{\ensuremath{^{\circ}}}
+\newcommand{\g}{\cdot}
+
+
+% ¤¤ Promille-hack (\promille) ¤¤ %
+\newcommand{\promille}{%
+  \relax\ifmmode\promillezeichen
+        \else\leavevmode\(\mathsurround=0pt\promillezeichen\)\fi}
+\newcommand{\promillezeichen}{%
+  \kern-.05em%
+  \raise.5ex\hbox{\the\scriptfont0 0}%
+  \kern-.15em/\kern-.15em%
+  \lower.25ex\hbox{\the\scriptfont0 00}}
+
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
+
+% ¤¤ CUSTOM MATEMATIK/FYSIK-TING ¤¤
+\renewcommand{\v}[1]{\ensuremath{\mbox{\textbf{#1}}}} % for vectors
+\newcommand{\gv}[1]{\ensuremath{\mbox{\boldmath$ \vec{#1}  $}}} 
+% for vectors of Greek letters
+\newcommand{\uv}[1]{\ensuremath{\mbox{\boldmath$ \hat{#1}  $}}}  % for unit vector
+\newcommand{\abs}[1]{\left| #1 \right|} % for absolute value
+\newcommand{\avg}[1]{\left< #1 \right>} % for average
+\let\underdot=\d % rename builtin command \d{} to \underdot{}
+\renewcommand{\d}[2]{\frac{d #1}{d #2}} % for derivatives
+\newcommand{\dd}[2]{\frac{d^2 #1}{d #2^2}} % for double derivatives
+\newcommand{\pd}[2]{\frac{\partial #1}{\partial #2}} 
+% for partial derivatives
+\newcommand{\pdd}[2]{\frac{\partial^2 #1}{\partial #2^2}} 
+% for double partial derivatives
+\newcommand{\pdc}[3]{\left( \frac{\partial #1}{\partial #2}
+ \right)_{#3}} % for thermodynamic partial derivatives
+\newcommand{\ket}[1]{\left| #1 \right>} % for Dirac bras
+\newcommand{\bra}[1]{\left< #1 \right|} % for Dirac kets
+\newcommand{\braket}[2]{\left< #1 \vphantom{#2} \right|
+ \left. #2 \vphantom{#1} \right>} % for Dirac brackets
+\newcommand{\matrixel}[3]{\left< #1 \vphantom{#2#3} \right|
+ #2 \left| #3 \vphantom{#1#2} \right>} % for Dirac matrix elements
+\newcommand{\grad}[1]{\gv{\nabla} #1} % for gradient
+\let\divsymb=\div % rename builtin command \div to \divsymb
+\renewcommand{\div}[1]{\gv{\nabla} \cdot #1} % for divergence
+\newcommand{\curl}[1]{\gv{\nabla} \times #1} % for curl
+\let\baraccent=\= % rename builtin command \= to \baraccent
+\renewcommand{\=}[1]{\stackrel{#1}{=}} % for putting numbers above =
+\renewcommand\Re{\operatorname{Re}}
+\renewcommand\Im{\operatorname{Im}}
+\newcommand{\comp}[1]{\widetilde{#1}}
+\newcommand{\unit}[1]{\ensuremath{\, \mathrm{#1}}}
+
+\newcommand{\eqvref}[1]{(\ref{#1}) på side \pageref{#1}}
+
+\newcommand{\forsog}[1]{\underline{#1}}
+
+\newcommand{\superscript}[1]{\ensuremath{^{\textrm{#1}}}}
+\newcommand{\subscript}[1]{\ensuremath{_{\textrm{#1}}}}
+
+
+%%%% ORDDELING %%%%
+
+\hyphenation{egen-skab-er egen-skab hvad hvem hvor Halv-le-der-ud-snit-tet}
+
+% Makro til fxnotes
+\newcommand{\AVP}[1]{\fxnote{\textbf{AVP}: #1}}
+\newcommand{\BM}[1]{\fxnote{\textbf{BM}: #1}}
