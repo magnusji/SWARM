@@ -22,12 +22,12 @@ class Readdata():
         n = len(self.Date)
         self.swarm_time = []
         for i in range(n):
-            self.swarm_time.append(dt.datetime.strptime(self.Date[i], "%Y-%m-%dT%H:%M:%S.%f"))
+            self.swarm_time.append(dt.datetime.strptime(self.Date[i], "%Y-%m-%dT%H:%M:%S.%f")) #transforming string to date
 
         self.swarm_time_sec = zeros(len(self.swarm_time))
         for i in range(len(self.swarm_time)):
-            self.swarm_time_sec[i] = mktime(self.swarm_time[i].timetuple()) + self.swarm_time[i].microsecond/1e6
-        print self.swarm_time_sec
+            self.swarm_time_sec[i] = mktime(self.swarm_time[i].timetuple()) + self.swarm_time[i].microsecond/1e6 #getting time in seconds since 01.01.1970
+        #print self.swarm_time_sec
 
     def distance(self): #calculating the distance from the gps to the satellite using Haversine formula
         self.Svalbardlat = 78.15; self.Svalbardlong = (16.04); #position of gps 
@@ -83,15 +83,19 @@ class Readdata():
     def set_var_gps(self): 
         self.infile_gps = open(self.filename_gps,'r');
         firstline = self.infile_gps.readline()
-        self.year_gps = []; self.plat = []; self.plong = [];
+        self.year_gps = [];self.month_gps = []; self.day_gps = []; self.sec_gps = []; self.plat = []; self.plong = [];
         for line in self.infile_gps:
             item = line.rstrip()
             words = line.split()
-            self.year_gps.append(words[0]); self.plat.append(float(words[6])); self.plong.append(words[7]); #getting the data from the data set, and setting variables
+            self.year_gps.append(words[0]);self.month_gps.append(words[1]), self.day_gps.append(words[2]); self.sec_gps.append(words[3]); self.plat.append(float(words[6])); self.plong.append(words[7]); #getting the data from the data set, and setting variables
         #print self.plat
         self.infile_gps.close()
+    
+    
+    def gps_time(self):
+        self.gps_time = dt.datetime(
 
-            
+        
         
 
 
