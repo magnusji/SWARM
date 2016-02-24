@@ -2,17 +2,33 @@ from numpy import *
 from matplotlib.pyplot import *
 import math
 from mpl_toolkits.basemap import Basemap
+import datetime as dt
+from time import mktime
 
 class Readdata():
-    def __init__(self,filename):
-        self.infile = open(filename,'r'); #self.infile.readlines();
+    def __init__(self,filename, filename_gps):
+        self.filename = filename #self.infile.readlines();
+        self.filename_gps = filename_gps 
 
     def set_var(self): 
+        self.infile = open(self.filename,'r');
         self.Date = []; self.Latitude = []; self.Longitude = []; self.electrondensity = []
         for line in self.infile:
             words = line.split()
             self.Date.append(words[1]); self.Latitude.append(words[4]); self.Longitude.append(words[5]); self.electrondensity.append(words[10]); #getting the data from the data set, and setting variables
-    
+        self.infile.close()
+        
+    def alltime(self):
+        n = len(self.Date)
+        self.swarm_time = []
+        for i in range(n):
+            self.swarm_time.append(dt.datetime.strptime(self.Date[i], "%Y-%m-%dT%H:%M:%S.%f"))
+
+        self.swarm_time_sec = zeros(len(self.swarm_time))
+        for i in range(len(self.swarm_time)):
+            self.swarm_time_sec[i] = mktime(self.swarm_time[i].timetuple()) + self.swarm_time[i].microsecond/1e6
+        print self.swarm_time_sec
+
     def distance(self): #calculating the distance from the gps to the satellite using Haversine formula
         self.Svalbardlat = 78.15; self.Svalbardlong = (16.04); #position of gps 
         lat1 = math.radians(self.Svalbardlat); lon1 = math.radians(self.Svalbardlong)
@@ -64,7 +80,16 @@ class Readdata():
             map.plot(self.Longitude[k],self.Latitude[k], 'r.',latlon='true') #adding the positions of the satellite every time it is within range
 
 
-
+    def set_var_gps(self): 
+        self.infile_gps = open(self.filename_gps,'r');
+        firstline = self.infile_gps.readline()
+        self.year_gps = []; self.plat = []; self.plong = [];
+        for line in self.infile_gps:
+            item = line.rstrip()
+            words = line.split()
+            self.year_gps.append(words[0]); self.plat.append(float(words[6])); self.plong.append(words[7]); #getting the data from the data set, and setting variables
+        #print self.plat
+        self.infile_gps.close()
 
             
         
@@ -72,8 +97,8 @@ class Readdata():
 
 
 
-a = Readdata('./Data/SW_PREL_EFIA_LP_1B_20131229T000000_20131229T235959_0102.txt') ;  a.set_var(); a.distance();a.makemap()
-
-#plot(a.Longitude,a.Latitude, 'b-', 16.04,78.15, 'r*')
+a = Readdata('./Data/SW_PREL_EFIA_LP_1B_20131229T000000_20131229T235959_0102.txt', './Data/tec.dat') ;  a.set_var(); a.distance();a.makemap(); a.alltime();a.set_var_gps()
+figure()
+plot(a.plong, a.plat, 'b-', 16.04,78.15, 'r*')
 show()                        
 
